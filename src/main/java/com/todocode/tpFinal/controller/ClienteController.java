@@ -26,13 +26,13 @@ public class ClienteController {
     @PostMapping("/clientes/crear")
     public String createCliente(@RequestBody Cliente cliente) {
         iClienteService.createCliente(cliente);
-        return  "Cliente creado con exito";
+        return  "Cliente creado con éxito";
     }
 
     @DeleteMapping("/clientes/eliminar/{idCliente}")
     public String deleteCliente(@PathVariable Long idCliente) {
         iClienteService.deleteCliente(idCliente);
-        return  "Cliente eliminado con exito";
+        return  "Cliente eliminado con éxito";
     }
 
     @PutMapping("/clientes/editar/{idCliente}")
