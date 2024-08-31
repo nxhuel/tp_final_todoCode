@@ -17,4 +17,30 @@ public class ClienteService implements IClienteService {
     public List<Cliente> getClientes() {
         return iClienteRepository.findAll();
     }
+
+    @Override
+    public Cliente findByCliente(Long idCliente) {
+        return iClienteRepository.findById(idCliente).orElse(null);
+    }
+
+    @Override
+    public void createCliente(Cliente cliente) {
+        iClienteRepository.save(cliente);
+    }
+
+    @Override
+    public void deleteCliente(Long idCliente) {
+        iClienteRepository.deleteById(idCliente);
+    }
+
+    @Override
+    public void updateCliente(Long idCliente, String nuevoNombre, String nuevoApellido, String nuevoDni) {
+            Cliente nuevoCliente = this.findByCliente(idCliente);
+
+            nuevoCliente.setNombre(nuevoNombre);
+            nuevoCliente.setApellido(nuevoApellido);
+            nuevoCliente.setDni(nuevoDni);
+
+            this.createCliente(nuevoCliente);
+    }
 }
