@@ -2,6 +2,7 @@ package com.todocode.tpFinal.service;
 
 import com.todocode.tpFinal.model.Producto;
 
+import java.nio.file.LinkOption;
 import java.util.List;
 
 public interface IProductoService {
@@ -14,4 +15,6 @@ public interface IProductoService {
     public void deleteProducto(Long codigoProducto);
 
     public void updateProducto(Long codigoProducto, String nuevoNombre, String nuevaMarca, Double nuevoCosto, Double nuevaCantidadDisponible);
+
+    public List<Producto> getProductosConBajoStock();
 }

@@ -1,5 +1,6 @@
 package com.todocode.tpFinal.service;
 
+import com.todocode.tpFinal.dto.VentaDTO;
 import com.todocode.tpFinal.model.Cliente;
 import com.todocode.tpFinal.model.Producto;
 import com.todocode.tpFinal.model.Venta;
@@ -17,4 +18,10 @@ public interface IVentaService {
     public void deleteVenta(Long codigoVenta);
 
     public void updateVenta(Long codigoVenta, LocalDate nuevaFechaVenta, Double nuevoTotal, List<Producto> nuevaListaProductos, Cliente nuevoCliente);
+
+    public List<Producto> getProductosByVenta(Long codigoVenta);
+
+    public String getResultadoVentas(LocalDate fechaVenta);
+
+    public VentaDTO getVentaConMayorMonto();
 }

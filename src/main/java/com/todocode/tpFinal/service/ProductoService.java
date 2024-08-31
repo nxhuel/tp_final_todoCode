@@ -44,4 +44,9 @@ public class ProductoService implements IProductoService {
 
         this.createProducto(nuevoProducto);
     }
+
+    @Override
+    public List<Producto> getProductosConBajoStock() {
+        return iProductoRepository.findByCantidadDisponibleLessThan(5.0);
+    }
 }

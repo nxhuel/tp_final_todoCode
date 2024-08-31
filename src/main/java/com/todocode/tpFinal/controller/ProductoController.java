@@ -46,4 +46,9 @@ public class ProductoController {
         Producto producto = iProductoService.findByProducto(codigoProducto);
         return producto;
     }
+
+    @GetMapping("/productos/faltaStock")
+    public List<Producto> getProductosConBajoStock() {
+        return iProductoService.getProductosConBajoStock();
+    }
 }

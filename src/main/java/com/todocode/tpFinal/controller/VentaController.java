@@ -1,10 +1,12 @@
 package com.todocode.tpFinal.controller;
 
+import com.todocode.tpFinal.dto.VentaDTO;
 import com.todocode.tpFinal.model.Cliente;
 import com.todocode.tpFinal.model.Producto;
 import com.todocode.tpFinal.model.Venta;
 import com.todocode.tpFinal.service.IVentaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -45,4 +47,23 @@ public class VentaController {
         return venta;
     }
 
+    @GetMapping("/ventas/productos/{codigoVenta}")
+    public List<Producto> getProductosByVenta(@PathVariable Long codigoVenta) {
+        return iVentaService.getProductosByVenta(codigoVenta);
+    }
+
+    @GetMapping("/ventas/{fechaVenta")
+    public String getResultadoVentas(@PathVariable LocalDate fechaVenta) {
+        return iVentaService.getResultadoVentas(fechaVenta);
+    }
+
+    @GetMapping("/ventas/mayorVenta")
+    public ResponseEntity<VentaDTO> getVentaMayorMonto() {
+        VentaDTO ventaDTO = iVentaService.getVentaConMayorMonto();
+        if (ventaDTO != null) {
+            return ResponseEntity.ok(ventaDTO);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
