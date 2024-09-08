@@ -1,10 +1,12 @@
 package com.todocode.tpFinal.service;
 
 import com.todocode.tpFinal.model.Producto;
+import com.todocode.tpFinal.model.Venta;
 import com.todocode.tpFinal.repository.IProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -47,6 +49,14 @@ public class ProductoService implements IProductoService {
 
     @Override
     public List<Producto> getProductosConBajoStock() {
-        return iProductoRepository.findByCantidadDisponibleLessThan(5.0);
+        List<Producto> faltantes = new ArrayList<>();
+        List<Producto> todos = this.getProductos();
+
+        for (Producto producto : todos) {
+            if (producto.getCantidadDisponible() <= 5) {
+                faltantes.add(producto);
+            }
+        }
+        return faltantes;
     }
 }

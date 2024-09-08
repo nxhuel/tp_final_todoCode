@@ -1,8 +1,8 @@
 package com.todocode.tpFinal.controller;
 
 import com.todocode.tpFinal.model.Producto;
+import com.todocode.tpFinal.model.Venta;
 import com.todocode.tpFinal.service.IProductoService;
-import com.todocode.tpFinal.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,13 +30,13 @@ public class ProductoController {
         return "Producto agregado con éxito";
     }
 
-    @DeleteMapping("/productos/eliminar/{codigoProducto")
+    @DeleteMapping("/productos/eliminar/{codigoProducto}")
     public String deleteProducto(@PathVariable Long codigoProducto) {
         iProductoService.deleteProducto(codigoProducto);
         return "Producto eliminado con éxito";
     }
 
-    @PutMapping("/productos/editar/{codigoProducto")
+    @PutMapping("/productos/editar/{codigoProducto}")
     public Producto updateProducto(@PathVariable Long codigoProducto,
                                    @RequestParam(required = false, value = "nombre") String nuevoNombre,
                                    @RequestParam(required = false, value = "marca") String nuevaMarca,

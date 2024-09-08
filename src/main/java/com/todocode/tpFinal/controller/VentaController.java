@@ -1,6 +1,6 @@
 package com.todocode.tpFinal.controller;
 
-import com.todocode.tpFinal.dto.VentaDTO;
+import com.todocode.tpFinal.dto.DetalleVentaDTO;
 import com.todocode.tpFinal.model.Cliente;
 import com.todocode.tpFinal.model.Producto;
 import com.todocode.tpFinal.model.Venta;
@@ -28,20 +28,24 @@ public class VentaController {
         return iVentaService.findByVenta(codigoVenta);
     }
 
-    @PostMapping("/ventas/crear")
+    @PostMapping(value = "/ventas/crear")
     public String createVenta(@RequestBody Venta venta) {
         iVentaService.createVenta(venta);
         return "Venta agregada con éxito";
     }
 
     @DeleteMapping("/ventas/eliminar/{codigoVenta}")
-    public String deleteVenta(Long codigoVenta) {
+    public String deleteVenta(@PathVariable Long codigoVenta) {
         iVentaService.deleteVenta(codigoVenta);
         return "Venta eliminada con éxito";
     }
 
     @PutMapping("/ventas/editar/{codigoVenta}")
-    public Venta updateVenta(Long codigoVenta, LocalDate nuevaFechaVenta, Double nuevoTotal, List<Producto> nuevaListaProductos, Cliente nuevoCliente) {
+    public Venta updateVenta(@PathVariable Long codigoVenta,
+                             @RequestParam (required = false, value = "fechaVenta") LocalDate nuevaFechaVenta,
+                             @RequestParam (required = false, value = "total") Double nuevoTotal,
+                             @RequestParam (required = false, value = "listaProductos") List<Producto> nuevaListaProductos,
+                             @RequestParam (required = false, value = "unCliente") Cliente nuevoCliente) {
         iVentaService.updateVenta(codigoVenta, nuevaFechaVenta, nuevoTotal, nuevaListaProductos, nuevoCliente);
         Venta venta = iVentaService.findByVenta(codigoVenta);
         return venta;
@@ -52,18 +56,13 @@ public class VentaController {
         return iVentaService.getProductosByVenta(codigoVenta);
     }
 
-    @GetMapping("/ventas/{fechaVenta")
+    @GetMapping("/ventas/resultados/{fechaVenta}")
     public String getResultadoVentas(@PathVariable LocalDate fechaVenta) {
         return iVentaService.getResultadoVentas(fechaVenta);
     }
 
     @GetMapping("/ventas/mayorVenta")
-    public ResponseEntity<VentaDTO> getVentaMayorMonto() {
-        VentaDTO ventaDTO = iVentaService.getVentaConMayorMonto();
-        if (ventaDTO != null) {
-            return ResponseEntity.ok(ventaDTO);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public DetalleVentaDTO getVentaMayorMonto() {
+        return iVentaService.getVentaConMayorMonto();
     }
 }

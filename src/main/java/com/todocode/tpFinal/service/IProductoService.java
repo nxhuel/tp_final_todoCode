@@ -1,8 +1,8 @@
 package com.todocode.tpFinal.service;
 
 import com.todocode.tpFinal.model.Producto;
+import com.todocode.tpFinal.model.Venta;
 
-import java.nio.file.LinkOption;
 import java.util.List;
 
 public interface IProductoService {

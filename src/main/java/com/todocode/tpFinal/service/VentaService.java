@@ -1,6 +1,6 @@
 package com.todocode.tpFinal.service;
 
-import com.todocode.tpFinal.dto.VentaDTO;
+import com.todocode.tpFinal.dto.DetalleVentaDTO;
 import com.todocode.tpFinal.model.Cliente;
 import com.todocode.tpFinal.model.Producto;
 import com.todocode.tpFinal.model.Venta;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class VentaService implements IVentaService{
+public class VentaService implements IVentaService {
 
     @Autowired
     private IVentaRepository iVentaRepository;
@@ -45,43 +45,60 @@ public class VentaService implements IVentaService{
         nuevaVenta.setFechaVenta(nuevaFechaVenta);
         nuevaVenta.setTotal(nuevoTotal);
         nuevaVenta.setListaProductos(nuevaListaProductos);
-        nuevaVenta.setUnCliente(nuevoCliente);
+        nuevaVenta.setCliente(nuevoCliente);
 
         this.createVenta(nuevaVenta);
     }
 
     @Override
     public List<Producto> getProductosByVenta(Long codigoVenta) {
-        Venta venta = iVentaRepository.findByCodigoVenta(codigoVenta).orElse(null);
+        Venta venta = this.findByVenta(codigoVenta);
         return venta.getListaProductos();
     }
 
     @Override
     public String getResultadoVentas(LocalDate fechaVenta) {
-        Double montoTotal = iVentaRepository.findTotalMontoByFechaVenta(fechaVenta);
-        Long cantidadVentas = iVentaRepository.countVentasByFechaVenta(fechaVenta);
+        List<Venta> todos = this.getVentas();
 
-        return String.format("Monto: %.2f\nVentas Totales: %d", montoTotal != null ? montoTotal : 0.0, cantidadVentas);
+        Double montoTotal = 0.0;
+        int cantidadTotal = 0;
+        String info = "";
+
+        for (Venta venta : todos) {
+            if (venta.getFechaVenta().equals(fechaVenta)) {
+                montoTotal += venta.getTotal();
+                cantidadTotal++;
+            }
+        }
+        info = String.format("Cantidad de ventas = %.2f\nMonto total = $%d.", montoTotal, cantidadTotal);
+
+        return info;
     }
 
     @Override
-    public VentaDTO getVentaConMayorMonto() {
-        Optional<Venta> ventaOptional = iVentaRepository.findVentaConMayorMonto();
-        if (ventaOptional.isPresent()) {
-            Venta venta = ventaOptional.get();
-            Double cantidadDisponible = venta.getListaProductos() != null ? venta.getListaProductos().size() : 0.0;
-            Cliente cliente = venta.getUnCliente();
-            String nombre = cliente != null ? cliente.getNombre() : "";
-            String apellido = cliente != null ? cliente.getApellido() : "";
+    public DetalleVentaDTO getVentaConMayorMonto() {
+        DetalleVentaDTO detalleVentaDTO = new DetalleVentaDTO();
 
-            return new VentaDTO(
-                    venta.getCodigoVenta(),
-                    venta.getTotal(),
-                    cantidadDisponible,
-                    nombre,
-                    apellido
-            );
+        Venta mayor = new Venta();
+
+        boolean esPrimera = true;
+        List<Venta> todos = this.getVentas();
+
+        for (Venta venta : todos) {
+            if (esPrimera) {
+                mayor = venta;
+                esPrimera = false;
+            } else if (venta.getTotal() > mayor.getTotal()) {
+                mayor = venta;
+            }
         }
-        return null;
+
+        detalleVentaDTO.setCodigoVenta(mayor.getCodigoVenta());
+        detalleVentaDTO.setTotal(mayor.getTotal());
+        detalleVentaDTO.setCantidadProductos((double) mayor.getListaProductos().size());
+        detalleVentaDTO.setNombreCliente(mayor.getCliente().getNombre());
+        detalleVentaDTO.setApellidoCliente(mayor.getCliente().getApellido());
+
+        return detalleVentaDTO;
     }
 }

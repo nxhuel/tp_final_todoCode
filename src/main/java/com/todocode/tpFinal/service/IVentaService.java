@@ -1,6 +1,6 @@
 package com.todocode.tpFinal.service;
 
-import com.todocode.tpFinal.dto.VentaDTO;
+import com.todocode.tpFinal.dto.DetalleVentaDTO;
 import com.todocode.tpFinal.model.Cliente;
 import com.todocode.tpFinal.model.Producto;
 import com.todocode.tpFinal.model.Venta;
@@ -23,5 +23,5 @@ public interface IVentaService {
 
     public String getResultadoVentas(LocalDate fechaVenta);
 
-    public VentaDTO getVentaConMayorMonto();
+    public DetalleVentaDTO getVentaConMayorMonto();
 }
