@@ -6,7 +6,6 @@ import com.todocode.tpFinal.model.Producto;
 import com.todocode.tpFinal.model.Venta;
 import com.todocode.tpFinal.service.IVentaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -45,7 +44,7 @@ public class VentaController {
                              @RequestParam (required = false, value = "fechaVenta") LocalDate nuevaFechaVenta,
                              @RequestParam (required = false, value = "total") Double nuevoTotal,
                              @RequestParam (required = false, value = "listaProductos") List<Producto> nuevaListaProductos,
-                             @RequestParam (required = false, value = "unCliente") Cliente nuevoCliente) {
+                             @RequestParam (required = false, value = "cliente") Cliente nuevoCliente) {
         iVentaService.updateVenta(codigoVenta, nuevaFechaVenta, nuevoTotal, nuevaListaProductos, nuevoCliente);
         Venta venta = iVentaService.findByVenta(codigoVenta);
         return venta;
