@@ -1,0 +1,17 @@
+com\todocode\tpFinal\controller\VentaController.class
+com\todocode\tpFinal\dto\DetalleVentaDTO.class
+com\todocode\tpFinal\service\ProductoService.class
+com\todocode\tpFinal\repository\IClienteRepository.class
+com\todocode\tpFinal\repository\IVentaRepository.class
+com\todocode\tpFinal\service\ClienteService.class
+com\todocode\tpFinal\service\IProductoService.class
+com\todocode\tpFinal\controller\ClienteController.class
+com\todocode\tpFinal\service\IClienteService.class
+com\todocode\tpFinal\service\IVentaService.class
+com\todocode\tpFinal\model\Producto.class
+com\todocode\tpFinal\service\VentaService.class
+com\todocode\tpFinal\model\Venta.class
+com\todocode\tpFinal\controller\ProductoController.class
+com\todocode\tpFinal\TpFinalApplication.class
+com\todocode\tpFinal\model\Cliente.class
+com\todocode\tpFinal\repository\IProductoRepository.class

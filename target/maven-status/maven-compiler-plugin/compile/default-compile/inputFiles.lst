@@ -1,0 +1,17 @@
+C:\Users\Nahuel\IdeaProjects\tpFinal\src\main\java\com\todocode\tpFinal\controller\ClienteController.java
+C:\Users\Nahuel\IdeaProjects\tpFinal\src\main\java\com\todocode\tpFinal\controller\ProductoController.java
+C:\Users\Nahuel\IdeaProjects\tpFinal\src\main\java\com\todocode\tpFinal\controller\VentaController.java
+C:\Users\Nahuel\IdeaProjects\tpFinal\src\main\java\com\todocode\tpFinal\dto\DetalleVentaDTO.java
+C:\Users\Nahuel\IdeaProjects\tpFinal\src\main\java\com\todocode\tpFinal\model\Cliente.java
+C:\Users\Nahuel\IdeaProjects\tpFinal\src\main\java\com\todocode\tpFinal\model\Producto.java
+C:\Users\Nahuel\IdeaProjects\tpFinal\src\main\java\com\todocode\tpFinal\model\Venta.java
+C:\Users\Nahuel\IdeaProjects\tpFinal\src\main\java\com\todocode\tpFinal\repository\IClienteRepository.java
+C:\Users\Nahuel\IdeaProjects\tpFinal\src\main\java\com\todocode\tpFinal\repository\IProductoRepository.java
+C:\Users\Nahuel\IdeaProjects\tpFinal\src\main\java\com\todocode\tpFinal\repository\IVentaRepository.java
+C:\Users\Nahuel\IdeaProjects\tpFinal\src\main\java\com\todocode\tpFinal\service\ClienteService.java
+C:\Users\Nahuel\IdeaProjects\tpFinal\src\main\java\com\todocode\tpFinal\service\IClienteService.java
+C:\Users\Nahuel\IdeaProjects\tpFinal\src\main\java\com\todocode\tpFinal\service\IProductoService.java
+C:\Users\Nahuel\IdeaProjects\tpFinal\src\main\java\com\todocode\tpFinal\service\IVentaService.java
+C:\Users\Nahuel\IdeaProjects\tpFinal\src\main\java\com\todocode\tpFinal\service\ProductoService.java
+C:\Users\Nahuel\IdeaProjects\tpFinal\src\main\java\com\todocode\tpFinal\service\VentaService.java
+C:\Users\Nahuel\IdeaProjects\tpFinal\src\main\java\com\todocode\tpFinal\TpFinalApplication.java
