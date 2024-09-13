@@ -6,7 +6,7 @@ services:
     ports:
       - "8080:8080"
     environment:
-      DB_URL: jdbc:mysql://docker_app_bazar:3306/app_bazar?createDataBaseIfNotExist&serverTimezone=UTC
+      DB_URL: jdbc:mysql://docker_app_bazar:3306/app_bazar?createDatabaseIfNotExist&serverTimezone=UTC
       DB_USER_NAME: root
       DB_PASSWORD: root
     restart: always
