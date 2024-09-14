@@ -1,4 +1,4 @@
-package com.todocode.tpFinal.exception;
+package com.todocode.tpFinal.exception.venta;
 
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpHeaders;
@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
@@ -17,25 +16,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@ControllerAdvice
-public class ClienteControllerAdvisor extends ResponseEntityExceptionHandler {
+public class VentaControllerAdvisor extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(ClienteNotFoundException.class)
-    public ResponseEntity<Object> handleClienteNotFoundException(
-            ClienteNotFoundException clienteNotFoundException, WebRequest request) {
+    @ExceptionHandler(VentaNotFoundException.class)
+    public ResponseEntity<Object> handleVentaNotFoundException(VentaNotFoundException ventaNotFoundException, WebRequest request){
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
-        body.put("message", clienteNotFoundException.getMessage());
+        body.put("message", ventaNotFoundException.getMessage());
 
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(ClienteNoDataFoundException.class)
-    public ResponseEntity<Object> handleClienteNoDataFoundException(
-            ClienteNoDataFoundException clienteNoDataFoundException, WebRequest request) {
+    @ExceptionHandler(VentaNoDataFoundException.class)
+    public ResponseEntity<Object> handleVentaNoDataFoundException(VentaNoDataFoundException ventaNoDataFoundException, WebRequest request) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
-        body.put("message", clienteNoDataFoundException.getMessage());
+        body.put("message", ventaNoDataFoundException.getMessage());
 
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }

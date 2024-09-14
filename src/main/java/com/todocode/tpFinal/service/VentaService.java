@@ -1,6 +1,8 @@
 package com.todocode.tpFinal.service;
 
 import com.todocode.tpFinal.dto.DetalleVentaDTO;
+import com.todocode.tpFinal.exception.venta.VentaNoDataFoundException;
+import com.todocode.tpFinal.exception.venta.VentaNotFoundException;
 import com.todocode.tpFinal.model.Cliente;
 import com.todocode.tpFinal.model.Producto;
 import com.todocode.tpFinal.model.Venta;
@@ -10,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class VentaService implements IVentaService {
@@ -20,12 +21,17 @@ public class VentaService implements IVentaService {
 
     @Override
     public List<Venta> getVentas() {
-        return iVentaRepository.findAll();
+        var ventas = (List<Venta>) iVentaRepository.findAll();
+        if (ventas.isEmpty()) {
+            throw new VentaNoDataFoundException();
+        }
+        return ventas;
     }
 
     @Override
     public Venta findByVenta(Long codigoVenta) {
-        return iVentaRepository.findById(codigoVenta).orElse(null);
+        return iVentaRepository.findById(codigoVenta)
+                .orElseThrow(()-> new VentaNotFoundException(codigoVenta));
     }
 
     @Override
@@ -41,6 +47,10 @@ public class VentaService implements IVentaService {
     @Override
     public void updateVenta(Long codigoVenta, LocalDate nuevaFechaVenta, Double nuevoTotal, List<Producto> nuevaListaProductos, Cliente nuevoCliente) {
         Venta nuevaVenta = this.findByVenta(codigoVenta);
+
+        if (nuevaVenta == null) {
+            throw new VentaNotFoundException(codigoVenta);
+        }
 
         nuevaVenta.setFechaVenta(nuevaFechaVenta);
         nuevaVenta.setTotal(nuevoTotal);

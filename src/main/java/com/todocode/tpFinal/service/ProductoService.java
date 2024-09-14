@@ -1,5 +1,7 @@
 package com.todocode.tpFinal.service;
 
+import com.todocode.tpFinal.exception.producto.ProductNoDataFoundException;
+import com.todocode.tpFinal.exception.producto.ProductNotFoundException;
 import com.todocode.tpFinal.model.Producto;
 import com.todocode.tpFinal.model.Venta;
 import com.todocode.tpFinal.repository.IProductoRepository;
@@ -17,12 +19,17 @@ public class ProductoService implements IProductoService {
 
     @Override
     public List<Producto> getProductos() {
-        return iProductoRepository.findAll();
+        var productos = (List<Producto>) iProductoRepository.findAll();
+        if (productos.isEmpty()) {
+            throw new ProductNoDataFoundException();
+        }
+        return productos;
     }
 
     @Override
     public Producto findByProducto(Long codigoProducto) {
-        return iProductoRepository.findById(codigoProducto).orElse(null);
+        return iProductoRepository.findById(codigoProducto)
+                .orElseThrow(() -> new ProductNotFoundException(codigoProducto));
     }
 
     @Override
@@ -38,6 +45,9 @@ public class ProductoService implements IProductoService {
     @Override
     public void updateProducto(Long codigoProducto, String nuevoNombre, String nuevaMarca, Double nuevoCosto, Double nuevaCantidadDisponible) {
         Producto nuevoProducto = this.findByProducto(codigoProducto);
+        if (nuevoProducto == null) {
+            throw new ProductNotFoundException(codigoProducto);
+        }
 
         nuevoProducto.setNombre(nuevoNombre);
         nuevoProducto.setMarca(nuevaMarca);
@@ -51,6 +61,10 @@ public class ProductoService implements IProductoService {
     public List<Producto> getProductosConBajoStock() {
         List<Producto> faltantes = new ArrayList<>();
         List<Producto> todos = this.getProductos();
+
+        if (todos.isEmpty()) {
+            throw new ProductNoDataFoundException();
+        }
 
         for (Producto producto : todos) {
             if (producto.getCantidadDisponible() <= 5) {

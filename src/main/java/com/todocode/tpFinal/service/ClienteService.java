@@ -1,10 +1,9 @@
 package com.todocode.tpFinal.service;
 
-import com.todocode.tpFinal.exception.ClienteNotFoundException;
-import com.todocode.tpFinal.exception.ClienteNoDataFoundException;
+import com.todocode.tpFinal.exception.cliente.ClientNotFoundException;
+import com.todocode.tpFinal.exception.cliente.ClientNoDataFoundException;
 import com.todocode.tpFinal.model.Cliente;
 import com.todocode.tpFinal.repository.IClienteRepository;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,17 +18,15 @@ public class ClienteService implements IClienteService {
     @Override
     public List<Cliente> getClientes() {
         var clientes = (List<Cliente>) iClienteRepository.findAll();
-
         if (clientes.isEmpty()) {
-            throw new ClienteNoDataFoundException();
+            throw new ClientNoDataFoundException();
         }
-
         return clientes;
     }
 
     @Override
     public Cliente findByCliente(Long idCliente) {
-        return iClienteRepository.findById(idCliente).orElseThrow(() -> new ClienteNotFoundException(idCliente));
+        return iClienteRepository.findById(idCliente).orElseThrow(() -> new ClientNotFoundException(idCliente));
     }
 
     @Override
@@ -47,7 +44,7 @@ public class ClienteService implements IClienteService {
         Cliente nuevoCliente = this.findByCliente(idCliente);
 
         if (nuevoCliente == null) {
-            throw new ClienteNotFoundException(idCliente);
+            throw new ClientNotFoundException(idCliente);
         }
 
         nuevoCliente.setNombre(nuevoNombre);

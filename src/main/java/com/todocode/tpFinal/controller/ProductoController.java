@@ -1,9 +1,11 @@
 package com.todocode.tpFinal.controller;
 
 import com.todocode.tpFinal.model.Producto;
-import com.todocode.tpFinal.model.Venta;
 import com.todocode.tpFinal.service.IProductoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,26 +27,26 @@ public class ProductoController {
     }
 
     @PostMapping("/productos/crear")
-    public String createProducto(@RequestBody Producto producto) {
+    public ResponseEntity<String> createProducto(@RequestBody @Valid Producto producto) {
         iProductoService.createProducto(producto);
-        return "Producto agregado con éxito";
+        return new ResponseEntity<>("Producto agregado con éxito", HttpStatus.CREATED);
     }
 
     @DeleteMapping("/productos/eliminar/{codigoProducto}")
-    public String deleteProducto(@PathVariable Long codigoProducto) {
+    public ResponseEntity<String> deleteProducto(@PathVariable Long codigoProducto) {
         iProductoService.deleteProducto(codigoProducto);
-        return "Producto eliminado con éxito";
+        return new ResponseEntity<>("Producto eliminado con éxito", HttpStatus.OK);
     }
 
     @PutMapping("/productos/editar/{codigoProducto}")
-    public Producto updateProducto(@PathVariable Long codigoProducto,
-                                   @RequestParam(required = false, value = "nombre") String nuevoNombre,
-                                   @RequestParam(required = false, value = "marca") String nuevaMarca,
-                                   @RequestParam(required = false, value = "costo") Double nuevoCosto,
-                                   @RequestParam(required = false, value = "cantidadDisponible") Double nuevaCantidadDisponible) {
+    public ResponseEntity<Producto> updateProducto(@PathVariable Long codigoProducto,
+                                                   @RequestParam(required = false, value = "nombre") String nuevoNombre,
+                                                   @RequestParam(required = false, value = "marca") String nuevaMarca,
+                                                   @RequestParam(required = false, value = "costo") Double nuevoCosto,
+                                                   @RequestParam(required = false, value = "cantidadDisponible") Double nuevaCantidadDisponible) {
         iProductoService.updateProducto(codigoProducto, nuevoNombre, nuevaMarca, nuevoCosto, nuevaCantidadDisponible);
         Producto producto = iProductoService.findByProducto(codigoProducto);
-        return producto;
+        return new ResponseEntity<>(producto, HttpStatus.OK);
     }
 
     @GetMapping("/productos/faltaStock")
