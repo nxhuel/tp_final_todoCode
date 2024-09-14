@@ -1,7 +1,10 @@
 package com.todocode.tpFinal.service;
 
+import com.todocode.tpFinal.exception.ClienteNotFoundException;
+import com.todocode.tpFinal.exception.ClienteNoDataFoundException;
 import com.todocode.tpFinal.model.Cliente;
 import com.todocode.tpFinal.repository.IClienteRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +18,18 @@ public class ClienteService implements IClienteService {
 
     @Override
     public List<Cliente> getClientes() {
-        return iClienteRepository.findAll();
+        var clientes = (List<Cliente>) iClienteRepository.findAll();
+
+        if (clientes.isEmpty()) {
+            throw new ClienteNoDataFoundException();
+        }
+
+        return clientes;
     }
 
     @Override
     public Cliente findByCliente(Long idCliente) {
-        return iClienteRepository.findById(idCliente).orElse(null);
+        return iClienteRepository.findById(idCliente).orElseThrow(() -> new ClienteNotFoundException(idCliente));
     }
 
     @Override
@@ -35,12 +44,16 @@ public class ClienteService implements IClienteService {
 
     @Override
     public void updateCliente(Long idCliente, String nuevoNombre, String nuevoApellido, String nuevoDni) {
-            Cliente nuevoCliente = this.findByCliente(idCliente);
+        Cliente nuevoCliente = this.findByCliente(idCliente);
 
-            nuevoCliente.setNombre(nuevoNombre);
-            nuevoCliente.setApellido(nuevoApellido);
-            nuevoCliente.setDni(nuevoDni);
+        if (nuevoCliente == null) {
+            throw new ClienteNotFoundException(idCliente);
+        }
 
-            this.createCliente(nuevoCliente);
+        nuevoCliente.setNombre(nuevoNombre);
+        nuevoCliente.setApellido(nuevoApellido);
+        nuevoCliente.setDni(nuevoDni);
+
+        this.createCliente(nuevoCliente);
     }
 }
