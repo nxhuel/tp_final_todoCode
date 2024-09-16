@@ -2,6 +2,15 @@ C:\Users\Nahuel\IdeaProjects\tpFinal\src\main\java\com\todocode\tpFinal\controll
 C:\Users\Nahuel\IdeaProjects\tpFinal\src\main\java\com\todocode\tpFinal\controller\ProductoController.java
 C:\Users\Nahuel\IdeaProjects\tpFinal\src\main\java\com\todocode\tpFinal\controller\VentaController.java
 C:\Users\Nahuel\IdeaProjects\tpFinal\src\main\java\com\todocode\tpFinal\dto\DetalleVentaDTO.java
+C:\Users\Nahuel\IdeaProjects\tpFinal\src\main\java\com\todocode\tpFinal\exception\cliente\ClienteControllerAdvisor.java
+C:\Users\Nahuel\IdeaProjects\tpFinal\src\main\java\com\todocode\tpFinal\exception\cliente\ClientNoDataFoundException.java
+C:\Users\Nahuel\IdeaProjects\tpFinal\src\main\java\com\todocode\tpFinal\exception\cliente\ClientNotFoundException.java
+C:\Users\Nahuel\IdeaProjects\tpFinal\src\main\java\com\todocode\tpFinal\exception\producto\ProductControllerAdvisor.java
+C:\Users\Nahuel\IdeaProjects\tpFinal\src\main\java\com\todocode\tpFinal\exception\producto\ProductNoDataFoundException.java
+C:\Users\Nahuel\IdeaProjects\tpFinal\src\main\java\com\todocode\tpFinal\exception\producto\ProductNotFoundException.java
+C:\Users\Nahuel\IdeaProjects\tpFinal\src\main\java\com\todocode\tpFinal\exception\venta\VentaControllerAdvisor.java
+C:\Users\Nahuel\IdeaProjects\tpFinal\src\main\java\com\todocode\tpFinal\exception\venta\VentaNoDataFoundException.java
+C:\Users\Nahuel\IdeaProjects\tpFinal\src\main\java\com\todocode\tpFinal\exception\venta\VentaNotFoundException.java
 C:\Users\Nahuel\IdeaProjects\tpFinal\src\main\java\com\todocode\tpFinal\model\Cliente.java
 C:\Users\Nahuel\IdeaProjects\tpFinal\src\main\java\com\todocode\tpFinal\model\Producto.java
 C:\Users\Nahuel\IdeaProjects\tpFinal\src\main\java\com\todocode\tpFinal\model\Venta.java
