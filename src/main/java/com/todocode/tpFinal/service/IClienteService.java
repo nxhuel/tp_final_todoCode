@@ -9,9 +9,9 @@ public interface IClienteService {
 
     public Cliente findByCliente(Long idCliente);
 
-    public void createCliente(Cliente cliente);
+    public Cliente createCliente(Cliente cliente);
 
     public void deleteCliente(Long idCliente);
 
-    public void updateCliente(Long idCliente, String nuevoNombre, String nuevoApellido, String nuevoDni);
+    public Cliente updateCliente(Long idCliente, String nuevoNombre, String nuevoApellido, String nuevoDni);
 }
