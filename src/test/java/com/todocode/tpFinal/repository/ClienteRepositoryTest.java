@@ -1,6 +1,5 @@
 package com.todocode.tpFinal.repository;
 
-import com.todocode.tpFinal.exception.cliente.ClientNotFoundException;
 import com.todocode.tpFinal.model.Cliente;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

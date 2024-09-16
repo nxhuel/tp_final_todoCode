@@ -27,9 +27,8 @@ public class ClienteController {
     }
 
     @PostMapping("/clientes/crear")
-    public ResponseEntity createCliente(@RequestBody @Valid Cliente cliente) {
-        iClienteService.createCliente(cliente);
-        return  new ResponseEntity(HttpStatus.CREATED);
+    public ResponseEntity<Cliente> createCliente(@RequestBody @Valid Cliente cliente) {
+        return  new ResponseEntity<>(iClienteService.createCliente(cliente), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/clientes/eliminar/{idCliente}")
