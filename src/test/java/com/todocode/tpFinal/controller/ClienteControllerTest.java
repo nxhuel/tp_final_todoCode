@@ -56,7 +56,7 @@ public class ClienteControllerTest {
     }
 
     @Test
-    void testGetCliente() throws Exception {
+    void testGetClientes() throws Exception {
 //        Given
         List<Cliente> listaClientes = new ArrayList<>();
         Cliente clienteUno = new Cliente();
