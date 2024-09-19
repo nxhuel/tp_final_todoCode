@@ -27,9 +27,9 @@ public class ProductoController {
     }
 
     @PostMapping("/productos/crear")
-    public ResponseEntity<String> createProducto(@RequestBody @Valid Producto producto) {
+    public ResponseEntity<Producto> createProducto(@RequestBody @Valid Producto producto) {
         iProductoService.createProducto(producto);
-        return new ResponseEntity<>("Producto agregado con éxito", HttpStatus.CREATED);
+        return new ResponseEntity<>(producto, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/productos/eliminar/{codigoProducto}")

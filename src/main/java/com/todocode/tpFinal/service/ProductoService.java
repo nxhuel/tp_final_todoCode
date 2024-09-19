@@ -3,7 +3,6 @@ package com.todocode.tpFinal.service;
 import com.todocode.tpFinal.exception.producto.ProductNoDataFoundException;
 import com.todocode.tpFinal.exception.producto.ProductNotFoundException;
 import com.todocode.tpFinal.model.Producto;
-import com.todocode.tpFinal.model.Venta;
 import com.todocode.tpFinal.repository.IProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,8 +32,9 @@ public class ProductoService implements IProductoService {
     }
 
     @Override
-    public void createProducto(Producto producto) {
+    public Producto createProducto(Producto producto) {
         iProductoRepository.save(producto);
+        return producto;
     }
 
     @Override
@@ -43,7 +43,7 @@ public class ProductoService implements IProductoService {
     }
 
     @Override
-    public void updateProducto(Long codigoProducto, String nuevoNombre, String nuevaMarca, Double nuevoCosto, Double nuevaCantidadDisponible) {
+    public Producto updateProducto(Long codigoProducto, String nuevoNombre, String nuevaMarca, Double nuevoCosto, Double nuevaCantidadDisponible) {
         Producto nuevoProducto = this.findByProducto(codigoProducto);
         if (nuevoProducto == null) {
             throw new ProductNotFoundException(codigoProducto);
@@ -55,6 +55,7 @@ public class ProductoService implements IProductoService {
         nuevoProducto.setCantidadDisponible(nuevaCantidadDisponible);
 
         this.createProducto(nuevoProducto);
+        return nuevoProducto;
     }
 
     @Override
